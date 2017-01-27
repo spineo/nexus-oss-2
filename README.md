@@ -1,7 +1,10 @@
 # nexus-oss-2
+
 Nexus Repository Manager OSS 2 Configuration
+
 Latest update: 2.14.2 (2016-12-18) - Replace with later version if needed
-VM: Instance runs on AWS Lightsail (Linux rhel fedora 2016.09)
+
+VM: Instance runs on Amazon AWS Lightsail (Linux rhel fedora 2016.09)
 
 ## OSS 2 Installation Summary for AWS Lightsail Instance
 
