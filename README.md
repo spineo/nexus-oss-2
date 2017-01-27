@@ -40,8 +40,16 @@ The initial credentials are admin/admin123 (click on "profile" to set up user/ch
 Logs: cd $NEXUS_HOME && tail -f logs/wrapper.log
 To change the port edit the "conf/nexus.properties" file and change the "application-port"
 Other parameters can be tweaked in the "conf/nexus.properties" (see documentation)
-To open a tcp/udp port (or range) consult the iptables or similar command documentation
+To open a tcp/udp port (or range) consult the iptables (or similar command) documentation
 ```
+
+### Configure Hosted Yum Repositories
+
+This option is available in the OSS 2 configuration (but only in NRM PRO for v3). Before configuring 
+this capability ensure that _createrepo_ and _mergerepo_ are available (usually under /usr/bin). If needed,
+_sudo yum install createrepo_ and ensure that the correct path of these commands is referenced in the 
+Nexus configuration under _Capabilities -> Yum: Configuration_. To Yum enable repositories simply click 
+on the 'Enabled' checkbox under this same location.
 
 ## References
 * Latest Releases (v2 and 3): https://www.sonatype.com/download-oss-sonatype
