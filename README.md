@@ -49,7 +49,7 @@ This option is available in the OSS 2 configuration (but only in NRM PRO for v3)
 this capability ensure that _createrepo_ and _mergerepo_ are available (usually under /usr/bin). If needed,
 _sudo yum install createrepo_ and ensure that the correct path of these commands is referenced in the 
 Nexus configuration under _Capabilities -> Yum: Configuration_. To Yum enable repositories simply click 
-on the 'Enabled' checkbox under this same location.
+on the 'Enabled' checkbox under this same location (see also the [Sonatype Docs](https://books.sonatype.com/nexus-book/reference/yum-configuration.html))
 
 ## References
 * Latest Releases (v2 and 3): https://www.sonatype.com/download-oss-sonatype
