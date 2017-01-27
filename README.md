@@ -12,7 +12,7 @@ tar xvzf nexus-2.14.2-01-bundle.tar.gz
 sudo mkdir /app && cd /app (instead of /usr/local since creating a 'nexus' user)
 sudo cp nexus-2.14.2-01-bundle.tar.gz .
 sudo tar xvzf nexus-2.14.2-01-bundle.tar.gz
-sudo ln -s nexus-2.14.2-01 nexus (the sibling directory 'sonatype-work' will also be created here)
+sudo ln -s nexus-2.14.2-01 nexus (the sibling directory 'sonatype-work' is also created here)
 ```
 
 ### Setup
@@ -32,14 +32,14 @@ cd $NEXUS_HOME
 ./bin/nexus start (starts the instance by default on port 8081)
 "./bin/nexus status" or "./bin/nexus stop" can be executed for daemon status and stopping
 If all went well, the UI should come using url http://<ip or localhost>:8081/nexus
-The initial login credentials are admin/admin123 (click on "profile" to set up user information and change password)
+The initial credentials are admin/admin123 (click on "profile" to set up user/change password)
 ```
 
 ### Troubleshooting
 ```
 Logs: cd $NEXUS_HOME && tail -f logs/wrapper.log
-To change the port edit the "conf/nexus.properties" file and change the "application-port" to use the new value
-The "conf/nexus.properties" file can be modified to tweak with other parameters (consult the documentation)
+To change the port edit the "conf/nexus.properties" file and change the "application-port"
+Other parameters can be tweaked in the "conf/nexus.properties" (see documentation)
 To open a tcp/udp port (or range) consult the iptables or similar command documentation
 ```
 
