@@ -39,7 +39,7 @@ cd $NEXUS_HOME
 ./bin/nexus start (starts the instance by default on port 8081)
 "./bin/nexus status" or "./bin/nexus stop" can be executed for daemon status and stopping
 If all went well, the UI should come using url http://<ip or localhost>:8081/nexus
-The initial login (top right) is admin/admin123
+The initial login credentials are admin/admin123 (click on "profile" to set up user information and change password)
 ```
 
 ### Troubleshooting
