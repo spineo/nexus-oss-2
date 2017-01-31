@@ -4,7 +4,9 @@ Nexus Repository Manager OSS 2 Configuration
 
 Latest update: 2.14.2 (2016-12-18) - Replace with later version if needed
 
-VM: Instance runs on Amazon AWS Lightsail (Linux rhel fedora 2016.09)
+Host: Instance runs on Amazon AWS Lightsail (Linux rhel fedora 2016.09)
+
+Purpose: Artifact upload (or deploy) and evaluation of Yum capability
 
 ## OSS 2 Installation Summary for AWS Lightsail Instance
 
@@ -53,14 +55,34 @@ this capability ensure that _createrepo_ and _mergerepo_ are available (usually 
 _sudo yum install createrepo_. and ensure that the correct path of these commands is referenced in the 
 Nexus configuration under _Capabilities -> Yum: Configuration_. The UI Configuration involves the following steps:
 ```
-Log in as 'admin'
-Navigate to 'Administration' -> 'Capabilities' in the UI
+Log into the Nexus UI as 'admin'
+Navigate to 'Administration' -> 'Capabilities'
 Add a 'Yum: Configuration' capability with path to createrepo/mergerepo, check 'Enabled'
 Add a 'Yum: Generate Metadata' capability for each repository/hosted group, check 'Enabled'
 Navigate to 'Administration' -> 'Scheduled Tasks'
 Add a 'Yum: Generated Metadata' task for each repository/hosted group, recurrence or run manually
 ```
 The above steps enable generation of Yum metadata (see also the [Sonatype Docs](https://books.sonatype.com/nexus-book/reference/yum-configuration.html) and a [Yum Example Usage](https://books.sonatype.com/nexus-book/reference/yum-example-usage.html))
+
+### Test by Adding an RPM
+Simple instructions to create an RPM include:
+
+
+### Configure Host Yum Repo
+```
+Log into the target host (i.e., where rpms will be installed) as root
+cd /etc/yum.repos.d
+Add a new entry to this directory (i.e., nexus.repo) with the following configuration:
+[nexus]
+name=Nexus Test Repository
+baseurl=http://<host>:<port>/nexus/content/repositories/nexus-test/
+enabled=1
+protect=0
+gpgcheck=0
+metadata_expire=30s
+autorefresh=1
+type=rpm-md
+```
 
 ## References
 * Latest Releases (v2 and 3): https://www.sonatype.com/download-oss-sonatype
