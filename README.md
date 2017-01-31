@@ -56,16 +56,18 @@ _sudo yum install createrepo_. and ensure that the correct path of these command
 Nexus configuration under _Capabilities -> Yum: Configuration_. The UI Configuration involves the following steps:
 ```
 Log into the Nexus UI as 'admin'
-Navigate to 'Administration' -> 'Capabilities'
+Uncollapse the 'Administration' section
+Click on 'Plugin Console' and verify that the 'Nexus Yum Repository Plugin' is installed
+Click on 'Capabilities'
 Add a 'Yum: Configuration' capability with path to createrepo/mergerepo, check 'Enabled'
 Add a 'Yum: Generate Metadata' capability for each repository/hosted group, check 'Enabled'
-Navigate to 'Administration' -> 'Scheduled Tasks'
+Click on 'Scheduled Tasks'
 Add a 'Yum: Generated Metadata' task for each repository/hosted group, recurrence or run manually
 ```
 The above steps enable generation of Yum metadata (see also the [Sonatype Docs](https://books.sonatype.com/nexus-book/reference/yum-configuration.html) and a [Yum Example Usage](https://books.sonatype.com/nexus-book/reference/yum-example-usage.html))
 
 ### Test by Adding an RPM
-Simple instructions to create an RPM include:
+Simple instructions to create an RPM (to be added)
 
 
 ### Configure Host Yum Repo
@@ -75,7 +77,7 @@ cd /etc/yum.repos.d
 Add a new entry to this directory (i.e., nexus.repo) with the following configuration:
 [nexus]
 name=Nexus Test Repository
-baseurl=http://<host>:<port>/nexus/content/repositories/nexus-test/
+baseurl=http://<host>:<port>/nexus/content/repositories/test-external/
 enabled=1
 protect=0
 gpgcheck=0
@@ -83,6 +85,8 @@ metadata_expire=30s
 autorefresh=1
 type=rpm-md
 ```
+### Querying and/or Installing the RPM
+_yum repolist_ should now show the newly created repo
 
 ## References
 * Latest Releases (v2 and 3): https://www.sonatype.com/download-oss-sonatype
