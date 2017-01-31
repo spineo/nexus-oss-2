@@ -66,9 +66,28 @@ Add a 'Yum: Generated Metadata' task for each repository/hosted group, recurrenc
 ```
 The above steps enable generation of Yum metadata (see also the [Sonatype Docs](https://books.sonatype.com/nexus-book/reference/yum-configuration.html) and a [Yum Example Usage](https://books.sonatype.com/nexus-book/reference/yum-example-usage.html))
 
-### Test by Adding an RPM
+### Creating a Test RPM
 Simple instructions to create an RPM (to be added)
 
+### Uploading (or deploying) an RPM
+The RPM can uploaded manually using the Nexus UI or deployed programmatically using a product like Maven or Gradle.
+For this exercise, we will do it manually using a sample artifact from [DBVis Download](https://www.dbvis.com/download/) Linux (RPM archive) which you can download locally.
+```
+Log into the Nexus UI (preferably as 'admin' since the last step requires this role)
+Select the repo to upload artifact into ('Snapshots' will not allow this option)
+Select the 'Artifact Upload' tab
+For the GAV Definition select 'GAV Parameters'
+Fill in the fields as follows:
+   Group: 'com.database' (an arbitrary name)
+   Artifact: 'dbvis'
+   Version: 9_5_5 (again, doesn't matter, RPM will see the correct one)
+   Packaging: rpm
+Click 'Select Artifact(s) to Download...' and browse to the directory where saved
+Select the file (i.e., dbvis_linux_9_5_5.rpm)
+Filename and Extension fields will auto-fill, leave Classifier empty
+Click 'Add Artifact' and then 'Upload Artifact(s)' and wait for upload to complete
+Go to 'Scheduled Tasks', select 'Yum: Generate Metadata' task for that repo, and Run
+```
 
 ### Configure Host Yum Repo
 ```
@@ -77,7 +96,7 @@ cd /etc/yum.repos.d
 Add a new entry to this directory (i.e., nexus.repo) with the following configuration:
 [nexus]
 name=Nexus Test Repository
-baseurl=http://<host>:<port>/nexus/content/repositories/test-external/
+baseurl=http://<host>:<port>/nexus/content/repositories/releases/
 enabled=1
 protect=0
 gpgcheck=0
@@ -85,8 +104,10 @@ metadata_expire=30s
 autorefresh=1
 type=rpm-md
 ```
-### Querying and/or Installing the RPM
+### Installing and Querying the RPM
 _yum repolist_ should now show the newly created repo
+_yum install dbvis_ should install the artifact we uploaded
+You can run _yum list | grep nexus_ or _repoquery -aq --repoid="nexus"_ to view the artifact 
 
 ## References
 * Latest Releases (v2 and 3): https://www.sonatype.com/download-oss-sonatype
