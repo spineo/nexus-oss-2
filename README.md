@@ -106,7 +106,9 @@ type=rpm-md
 ```
 ### Installing and Querying the RPM
 _yum repolist_ should now show the newly created repo
+
 _yum install dbvis_ should install the artifact we uploaded
+
 You can run _yum list | grep nexus_ or _repoquery -aq --repoid="nexus"_ to view the artifact 
 
 ## References
